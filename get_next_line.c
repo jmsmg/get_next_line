@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/06 18:26:30 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/06 21:03:56 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,10 @@ char	*get_next_line(int fd)
 	// 못찾는 경우 (찾을 때까지 계속 돌림)
 	while (ft_strchr(buf, '\n') != 0)
 	{
-		buf_len += read(fd, buf + buf_len, BUFFER_SIZE);
+		buf_len += read(fd, buf, BUFFER_SIZE);
 		i++;
 	}
-
 	line = ft_strchr(buf, '\n');
-	
-
 	if (line == 0)
 	{
 		ptr = malloc(sizeof(char *) * ret + 1);
@@ -48,7 +45,7 @@ char	*get_next_line(int fd)
 	i = 0;
 	while (buf[i] != '\n' || buf[i] != 0)
 	{
-		ft_memset(ptr, buf[i], 1);
+		ft_memmove(ptr, buf[i], 1);
 		i++;
 	}
 	buf[i + 1] = '\0';
