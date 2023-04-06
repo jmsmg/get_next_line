@@ -14,6 +14,9 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# include "get_next_line.c"
-# include "get_next_line_utils.c"
+
+char	*get_next_line(int fd);
+int	ft_strchr(const char *s, int c);
+void	*ft_memset(void *b, int c, size_t len);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:31:04 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/06 13:40:26 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:04:07 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ int	ft_strchr(const char *s, int c)
 	{
 		return (0);
 	}
-	return (i - 1);
+	return (i);
 }
