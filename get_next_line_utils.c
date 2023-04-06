@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:31:04 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/06 12:35:10 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/06 13:40:26 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,22 @@ void	*ft_memset(void *b, int c, size_t len)
 		i++;
 	}
 	return (b);
+}
+
+int	ft_strchr(const char *s, int c)
+{
+	int		i;
+	char	tmp;
+
+	tmp = c;
+	i = 0;
+	while (s[i] && s[i] != tmp)
+	{
+		i++;
+	}
+	if (!(s[i]) && tmp != '\0')
+	{
+		return (0);
+	}
+	return (i - 1);
 }
