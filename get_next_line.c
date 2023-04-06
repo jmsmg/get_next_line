@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/06 14:04:08 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/06 18:26:30 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,29 @@
 
 char	*get_next_line(int fd)
 {
-	int					i;
-	int					line;
-	char				*ptr;
-	char				*buf;
-	static ssize_t		ret;
+	int				i;
+	int				line;
+	char			*buf;
+	char			*ptr;
+	static ssize_t	ret;
 
-	buf = 0;
-	ret += read(fd, buf, 1);
-	if (ret == -1 || ret == 0)
+	i = 0;
+	buf_len = read(fd, buf, BUFFER_SIZE);
+	if (buf_len == -1 || buf_len == 0)
 	{
 		return (0);
 	}
+	// 버퍼 안에 \n이 포함 될 경우, 안될 경우 두가지로 나눠야함
+	// 못찾는 경우 (찾을 때까지 계속 돌림)
+	while (ft_strchr(buf, '\n') != 0)
+	{
+		buf_len += read(fd, buf + buf_len, BUFFER_SIZE);
+		i++;
+	}
+
 	line = ft_strchr(buf, '\n');
+	
+
 	if (line == 0)
 	{
 		ptr = malloc(sizeof(char *) * ret + 1);

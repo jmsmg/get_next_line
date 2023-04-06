@@ -6,11 +6,23 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:31:04 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/06 14:04:07 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/06 16:23:59 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
+}
 
 void	*ft_memset(void *b, int c, size_t len)
 {
