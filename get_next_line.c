@@ -28,11 +28,11 @@ char	*get_next_line(int fd)
 		return (0);
 	}
 	// get index for return
-	i = ft_strchr(buf, '\n', ret);
+	i = ft_strchr(buf, '\n', ret, buf_len);
 	// allocate temporary memory
 	ptr = malloc(sizeof(char *) * (i - ret) + 2);
 	i = 0;
-	while (buf[ret] != '\n' && buf[ret] != '\0')
+	while (buf[ret] != '\n' && buf[ret] != '\0' && i < buf_len)
 	{
 		ptr[i] = buf[ret];
 		i++;

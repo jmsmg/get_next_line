@@ -37,13 +37,17 @@ char	*ft_strdup(const char *s1)
 	return (tmp);
 }
 
-int	ft_strchr(const char *s, int c, int i)
+int	ft_strchr(const char *s, int c, int ret, int buf_len)
 {
-	while (s[i] && s[i] != c)
+	int	i;
+
+	i = 0;
+	while (s[ret] && s[ret] != c && i < buf_len)
 	{
 		i++;
+		ret++;
 	}
-	if (!(s[i]) && c != '\0')
+	if (!(s[ret]) && c != '\0')
 	{
 		return (0);
 	}

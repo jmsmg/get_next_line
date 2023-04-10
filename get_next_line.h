@@ -15,11 +15,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int     ft_strchr(const char *s, int c, int i);
+int	ft_strchr(const char *s, int c, int ret, int buf_len);
 char	*get_next_line(int fd);
 
 #endif
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 10
 #endif
