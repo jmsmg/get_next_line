@@ -14,42 +14,32 @@
 
 char	*get_next_line(int fd)
 {
-	int				i;
-	int				line;
-	char			*buf;
-	char			*ptr;
-	static ssize_t	ret;
+	int			i;
+	int			buf_len;
+	char		buf[BUFFER_SIZE];
+	char		*ptr;
+	static int	ret;
 
 	i = 0;
 	buf_len = read(fd, buf, BUFFER_SIZE);
+	// when the read function fails or nothing to read exception handling
 	if (buf_len == -1 || buf_len == 0)
 	{
 		return (0);
 	}
-	// 버퍼 안에 \n이 포함 될 경우, 안될 경우 두가지로 나눠야함
-	// 못찾는 경우 (찾을 때까지 계속 돌림)
-	while (ft_strchr(buf, '\n') != 0)
-	{
-		buf_len += read(fd, buf, BUFFER_SIZE);
-		i++;
-	}
-	line = ft_strchr(buf, '\n');
-	if (line == 0)
-	{
-		ptr = malloc(sizeof(char *) * ret + 1);
-	}
-	else
-	{
-		ptr = malloc(sizeof(char *) * line + 1);
-	}
+	// get index for return
+	i = ft_strchr(buf, '\n', ret);
+	// allocate temporary memory
+	ptr = malloc(sizeof(char *) * (i - ret) + 2);
 	i = 0;
-	while (buf[i] != '\n' || buf[i] != 0)
+	while (buf[ret] != '\n' && buf[ret] != '\0')
 	{
-		ft_memmove(ptr, buf[i], 1);
+		ptr[i] = buf[ret];
 		i++;
+		ret++;
 	}
-	buf[i + 1] = '\0';
-	ret = 0;
-	ret -= line;
-	return (0);
+	ret++;
+	ptr[i] = '\n';
+	ptr[i + 1] = '\0';
+	return (ptr);
 }

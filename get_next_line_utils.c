@@ -12,45 +12,38 @@
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strdup(const char *s1)
 {
+	char	*tmp;
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s1[i])
 	{
 		i++;
 	}
-	return (i);
+	tmp = malloc(sizeof(char) * i + 1);
+	if (!tmp)
+	{
+		return (NULL);
+	}
+	i = 0;
+	while (s1[i])
+	{
+		tmp[i] = s1[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	return (tmp);
 }
 
-void	*ft_memset(void *b, int c, size_t len)
+int	ft_strchr(const char *s, int c, int i)
 {
-	unsigned char	*tmp;
-	unsigned long	i;
-
-	i = 0;
-	tmp = (unsigned char *)b;
-	while (i < len)
-	{
-		tmp[i] = c;
-		i++;
-	}
-	return (b);
-}
-
-int	ft_strchr(const char *s, int c)
-{
-	int		i;
-	char	tmp;
-
-	tmp = c;
-	i = 0;
-	while (s[i] && s[i] != tmp)
+	while (s[i] && s[i] != c)
 	{
 		i++;
 	}
-	if (!(s[i]) && tmp != '\0')
+	if (!(s[i]) && c != '\0')
 	{
 		return (0);
 	}

@@ -14,11 +14,12 @@
 # define GET_NEXT_LINE_H
 # include <stdlib.h>
 # include <unistd.h>
-# define BUFFER_SIZE 1024;
 
-size_t	ft_strlen(const char *s);
-int		ft_strchr(const char *s, int c);
+int     ft_strchr(const char *s, int c, int i);
 char	*get_next_line(int fd);
-void	*ft_memset(void *b, int c, size_t len);
 
+#endif
+
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 1024
 #endif
