@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 	// allocate temporary memory
 	ptr = malloc(sizeof(char *) * (i - ret) + 2);
 	i = 0;
-	while (buf[ret] != '\n' && buf[ret] != '\0' && i < buf_len)
+	while (buf[ret] != '\n' && buf[ret] != '\0')
 	{
 		ptr[i] = buf[ret];
 		i++;
