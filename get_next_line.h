@@ -15,9 +15,14 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	ft_strchr(const char *s, int c, int ret, int buf_len);
-char	*get_next_line(int fd);
+typedef struct s_list
+{
+    void            *content;
+    struct s_list   next;
+} t_list;
 
+int	ft_strchr(const char *s, int c);
+char	*get_next_line(int fd);
 #endif
 
 #ifndef BUFFER_SIZE
