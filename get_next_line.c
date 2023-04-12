@@ -15,22 +15,17 @@
 char	*get_next_line(int fd)
 {
 	int			i;
-	int			buf_len;
-	char		buf[BUFFER_SIZE];
+	char		buffer[BUFFER_SIZE + 1];
 	char		*ptr;
 	static int	ret;
 
 	i = 0;
-	buf_len = read(fd, buf, BUFFER_SIZE);
-	// when the read function fails or nothing to read exception handling
-	if (buf_len == -1 || buf_len == 0)
+	i = ft_strchr(buf, '\n');
+	ptr = (char)malloc((sizeof(char) * i) + 1);
+	if (!ptr)
 	{
 		return (0);
 	}
-	// get index for return
-	i = ft_strchr(buf, '\n', ret, buf_len);
-	// allocate temporary memory
-	ptr = malloc(sizeof(char *) * (i - ret) + 2);
 	i = 0;
 	while (buf[ret] != '\n' && buf[ret] != '\0')
 	{
