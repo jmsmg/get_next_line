@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*get_next_line(int fd)
 {
@@ -20,29 +21,17 @@ char	*get_next_line(int fd)
 	static int	ret;
 
 	i = 0;
-	if (read(fd, buffer, BUFFER_SIZE) == -1)
+	ret += read(fd, buffer, BUFFER_SIZE);
+	if (ret == -1)
 	{
 		return (0);
-	}
-	if (ft_strchr(buffer, '\n'))
+	}	
+	ptr = ft_strdup(buffer);
+	while (!ft_strchr(buffer, '\n')) // EOF 처리해야함
 	{
-
+		printf("%d\n", ret);
+		ret += read(fd, buffer, ret + BUFFER_SIZE);
+		ptr = ft_strjoin(ptr, buffer);
 	}
-	
-	ptr = (char)malloc((sizeof(char) * i) + 1);
-	if (!ptr)
-	{
-		return (0);
-	}
-	i = 0;
-	while (buf[ret] != '\n' && buf[ret] != '\0')
-	{
-		ptr[i] = buf[ret];
-		i++;
-		ret++;
-	}
-	ret++;
-	ptr[i] = '\n';
-	ptr[i + 1] = '\0';
 	return (ptr);
 }

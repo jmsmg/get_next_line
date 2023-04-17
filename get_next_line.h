@@ -15,13 +15,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_list
-{
-    void            *content;
-    struct s_list   next;
-} t_list;
-
-int	ft_strchr(const char *s, int c);
+int	    ft_strchr(const char *s, int c);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strdup(const char *s1);
 char	*get_next_line(int fd);
 #endif
 
