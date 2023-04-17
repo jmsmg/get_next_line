@@ -93,14 +93,15 @@ char	*ft_strdup(const char *s1)
 	return (tmp);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && s[i] != c)
+	while (s[i] && s[i] != '\n')
 	{
 		i++;
 	}
-	return (i);
+	if (s[i] == '\n')
+	{
+		return (1);
+	}
+	return (0);
 }
