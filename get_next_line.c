@@ -15,12 +15,20 @@
 char	*get_next_line(int fd)
 {
 	int			i;
-	char		buffer[BUFFER_SIZE + 1];
+	char		buffer[BUFFER_SIZE];
 	char		*ptr;
 	static int	ret;
 
 	i = 0;
-	i = ft_strchr(buf, '\n');
+	if (read(fd, buffer, BUFFER_SIZE) == -1)
+	{
+		return (0);
+	}
+	if (ft_strchr(buffer, '\n'))
+	{
+
+	}
+	
 	ptr = (char)malloc((sizeof(char) * i) + 1);
 	if (!ptr)
 	{
