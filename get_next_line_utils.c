@@ -95,13 +95,16 @@ char	*ft_strdup(const char *s1)
 
 int	ft_strchr(const char *s)
 {
-	while (s[i] && s[i] != '\n')
+	int	i;
+
+	i = 0;
+	while (s[i] && i < BUFFER_SIZE && s[i] != '\n')
 	{
 		i++;
 	}
-	if (s[i] == '\n')
+	if (s[i] && s[i] == '\n')
 	{
-		return (1);
+		return (0);
 	}
-	return (0);
+	return (i);
 }

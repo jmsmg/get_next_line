@@ -27,9 +27,9 @@ char	*get_next_line(int fd)
 	}
 	ret += tmp;
 	ptr = ft_strdup(buffer);
-	while (ft_strchr(buffer)) // EOF 처리해야함
+	while (ft_strchr(ptr) != -1)
 	{
-		tmp = read(fd, buffer, ret + BUFFER_SIZE);
+		tmp = read(fd, buffer + ret, BUFFER_SIZE);
 		ret += tmp;
 		ptr = ft_strjoin(ptr, buffer);
 	}
