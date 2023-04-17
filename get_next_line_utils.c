@@ -68,7 +68,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (tmp);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strndup(const char *s1, int	n)
 {
 	char	*tmp;
 	size_t	i;
@@ -84,7 +84,7 @@ char	*ft_strdup(const char *s1)
 		return (NULL);
 	}
 	i = 0;
-	while (s1[i])
+	while (s1[i] && i < n)
 	{
 		tmp[i] = s1[i];
 		i++;
@@ -102,9 +102,9 @@ int	ft_strchr(const char *s)
 	{
 		i++;
 	}
-	if (s[i] && s[i] == '\n')
+	if (s[i] && s[i - 1] == '\n')
 	{
-		return (0);
+		return (i);
 	}
-	return (i);
+	return (0);
 }

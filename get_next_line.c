@@ -15,21 +15,24 @@
 
 char	*get_next_line(int fd)
 {
-	int			tmp;
+	int			n;
 	char		buffer[BUFFER_SIZE];
 	char		*ptr;
 	static int	ret;
 
-	tmp = read(fd, buffer, BUFFER_SIZE);
-	if (tmp == -1)
+	n = read(fd, buffer, BUFFER_SIZE);
+	if (n == -1)
 	{
-		return (0);
+		return (NULL);
 	}
-	ret += tmp;
-	ptr = ft_strdup(buffer);
-	while (ft_strchr(ptr) != -1)
+	ptr = ft_strdup(buffer, BUFFER_SIZE);
+	while (!ft_strchr(ptr))
 	{
-		tmp = read(fd, buffer + ret, BUFFER_SIZE);
+		ret += read(fd, buffer, BUFFER_SIZE);
+		ft_strjoin(ptr, )
+	}
+	while ()
+	{
 		ret += tmp;
 		ptr = ft_strjoin(ptr, buffer);
 	}
