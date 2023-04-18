@@ -49,13 +49,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dst_len + src_len);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strnjoin(char const *s1, char const *s2, int n)
 {
 	size_t	i;
 	size_t	size;
 	char	*tmp;
 
-	size = ft_strlen(s1) + ft_strlen(s2);
+	size = ft_strlen(s1) + n;
 	tmp = (char *)malloc(size + 1);
 	if (!tmp)
 	{
@@ -102,7 +102,7 @@ int	ft_strchr(const char *s)
 	{
 		i++;
 	}
-	if (s[i] && s[i - 1] == '\n')
+	if (s[i] || s[i] == '\n')
 	{
 		return (i);
 	}

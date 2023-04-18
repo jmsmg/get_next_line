@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/10 12:41:17 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/18 15:12:05 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,21 @@
 
 char	*get_next_line(int fd)
 {
-	int			n;
-	char		buffer[BUFFER_SIZE];
-	char		*ptr;
-	static int	ret;
+	node	list;
+	char	buffer[BUFFER_SIZE];
+	char	*ptr;
 
-	n = read(fd, buffer, BUFFER_SIZE);
-	if (n == -1)
-	{
+	ptr = (char *)malloc(1);
+	if (!ptr)
 		return (NULL);
-	}
-	ptr = ft_strdup(buffer, BUFFER_SIZE);
+	ptr[0] = '\0';
 	while (!ft_strchr(ptr))
 	{
-		ret += read(fd, buffer, BUFFER_SIZE);
-		ft_strjoin(ptr, )
-	}
-	while ()
-	{
-		ret += tmp;
-		ptr = ft_strjoin(ptr, buffer);
+		n = read(fd, buffer, BUFFER_SIZE);
+		if (n == -1)
+			return (NULL);
+		ptr = ft_strnjoin(ptr, buffer, n);
+		ret += n;
 	}
 	return (ptr);
 }

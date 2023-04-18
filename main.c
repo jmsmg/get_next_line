@@ -17,10 +17,16 @@
 
 int	main()
 {
-	int	fd;
+	int		fd;
+	char	*a;
+	char	*b;
 
 	fd = open("./test1.txt", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
+	read(fd, a, BUFFER_SIZE);
+	printf("%s\n", a);
+	read(fd, a, BUFFER_SIZE);
+	printf("%s", a);
+	read(fd, a, BUFFER_SIZE);
+	printf("%s", a);
 	close(fd);
 }
