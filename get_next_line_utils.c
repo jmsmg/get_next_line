@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:31:04 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/06 18:26:52 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:04:58 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	return (dst_len + src_len);
 }
 
-char	*ft_strnjoin(char const *s1, char const *s2, int n)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	size;
 	char	*tmp;
 
-	size = ft_strlen(s1) + n;
+	size = ft_strlen(s1) + ft_strlen(s2);
 	tmp = (char *)malloc(size + 1);
 	if (!tmp)
 	{
@@ -68,7 +68,7 @@ char	*ft_strnjoin(char const *s1, char const *s2, int n)
 	return (tmp);
 }
 
-char	*ft_strndup(const char *s1, int	n)
+char	*ft_strdup(const char *s1)
 {
 	char	*tmp;
 	size_t	i;
@@ -84,7 +84,7 @@ char	*ft_strndup(const char *s1, int	n)
 		return (NULL);
 	}
 	i = 0;
-	while (s1[i] && i < n)
+	while (s1[i])
 	{
 		tmp[i] = s1[i];
 		i++;
@@ -93,18 +93,18 @@ char	*ft_strndup(const char *s1, int	n)
 	return (tmp);
 }
 
-int	ft_strchr(const char *s)
+char	*ft_strchr(const char *s, int c)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (s[i] && i < BUFFER_SIZE && s[i] != '\n')
+	while (s[i] && s[i] != c)
 	{
 		i++;
 	}
-	if (s[i] || s[i] == '\n')
+	if (!(s[i]) && c != '\0')
 	{
-		return (i);
+		return (0);
 	}
-	return (0);
+	return ((char *)s + i);
 }
