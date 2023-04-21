@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:33:41 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/20 16:36:09 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/21 11:11:37 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 # include <unistd.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 1024
 #endif
 
 size_t	ft_strlen(const char *s);
-char    *ft_strchr(const char *s, int c);
 char	*ft_strcat(char *dst, const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
