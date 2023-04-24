@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:31:04 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/24 16:09:42 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/24 18:03:47 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strcat(char *dst, const char *src)
 	return (dst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	size;
@@ -53,10 +53,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		return (0);
 	}
-	tmp[0] = 0;
+	tmp[0] = '\0';
 	ft_strcat(tmp, s1);
 	i = ft_strlen(s1);
 	ft_strcat(tmp + i, s2);
+	free(s1);
 	return (tmp);
 }
 
@@ -85,7 +86,7 @@ char	*ft_strdup(const char *s1)
 	return (tmp);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*tmp;
 	size_t	i;
@@ -111,5 +112,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	tmp[i] = '\0';
+	free(s);
 	return (tmp);
 }
