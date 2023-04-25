@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/25 12:18:03 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/25 17:03:08 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ char	*get_remain(char *ptr)
 	{
 		return (NULL);
 	}
-	tmp = ft_substr(ptr, 0, i + 1);
+	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr));
+	if (tmp == NULL)
+	{
+		return (NULL);
+	}
+	ptr[i + 1] = '\0';
 	return (tmp);
 }
 
@@ -47,12 +52,16 @@ char	*get_return_value(int fd, char *buf, char *ptr, char *remain)
 			return (remain);
 		buf[len] = '\0';
 		ptr = remain;
-		remain = ft_strjoin(remain, buf);
+		remain = ft_strjoin(ptr, buf);
 		free(ptr);
 		if (remain == NULL)
+		{
 			return (NULL);
+		}
 		while (buf[i] && buf[i] == '\n')
+		{
 			return (remain);
+		}
 	}
 	return (remain);
 }
