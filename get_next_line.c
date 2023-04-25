@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/25 19:07:42 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/25 20:04:14 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,20 +66,23 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 
 char	*get_next_line(int fd)
 {
-	char		buf[BUFFER_SIZE + 1];
+	char		*buf;
 	char		*ptr;
 	static char	*remain;
 
 	ptr = 0;
 	if (fd < 0 || BUFFER_SIZE < 1)
-	{
 		return (NULL);
-	}
+	buf = (char *)malloc((sizeof(char) * BUFFER_SIZE) + 1);
+	if (!buf)
+		return (NULL);
 	if (!remain)
 	{
 		remain = ft_strdup("");
 	}
 	ptr = get_return_value(fd, buf, remain);
+	free(buf);
+	buf = NULL;
 	if (!ptr || ptr[0] == '\0')
 	{
 		free(remain);
