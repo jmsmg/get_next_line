@@ -6,14 +6,14 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/25 17:03:08 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:41:22 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*get_remain(char *ptr)
+static char	*get_remain(char *ptr)
 {
 	int		i;
 	char	*tmp;
@@ -36,9 +36,9 @@ char	*get_remain(char *ptr)
 	return (tmp);
 }
 
-char	*get_return_value(int fd, char *buf, char *ptr, char *remain)
+static char	*get_return_value(int fd, char *buf, char *ptr, char *remain)
 {
-	int	i;
+	int i;
 	int	len;
 
 	i = 0;
@@ -48,19 +48,19 @@ char	*get_return_value(int fd, char *buf, char *ptr, char *remain)
 		len = read(fd, buf, BUFFER_SIZE);
 		if (len == -1)
 			return (NULL);
-		else if (len == 0)
+		if (len == 0)
 			return (remain);
 		buf[len] = '\0';
 		ptr = remain;
 		remain = ft_strjoin(ptr, buf);
 		free(ptr);
 		if (remain == NULL)
-		{
 			return (NULL);
-		}
-		while (buf[i] && buf[i] == '\n')
+		while (buf[i] != '\0')
 		{
-			return (remain);
+			if (buf[i] == '\n')
+				return (remain);
+			i++;
 		}
 	}
 	return (remain);
