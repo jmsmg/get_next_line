@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/25 18:41:22 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/25 19:07:42 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static char	*get_remain(char *ptr)
 	return (tmp);
 }
 
-static char	*get_return_value(int fd, char *buf, char *ptr, char *remain)
+static char	*get_return_value(int fd, char *buf, char *remain)
 {
-	int i;
-	int	len;
+	int		i;
+	int		len;
 
 	i = 0;
 	len = 1;
@@ -51,12 +51,10 @@ static char	*get_return_value(int fd, char *buf, char *ptr, char *remain)
 		if (len == 0)
 			return (remain);
 		buf[len] = '\0';
-		ptr = remain;
-		remain = ft_strjoin(ptr, buf);
-		free(ptr);
+		remain = ft_strjoin(remain, buf);
 		if (remain == NULL)
 			return (NULL);
-		while (buf[i] != '\0')
+		while (buf[i])
 		{
 			if (buf[i] == '\n')
 				return (remain);
@@ -81,12 +79,12 @@ char	*get_next_line(int fd)
 	{
 		remain = ft_strdup("");
 	}
-	ptr = get_return_value(fd, buf, ptr, remain);
+	ptr = get_return_value(fd, buf, remain);
 	if (!ptr || ptr[0] == '\0')
 	{
 		free(remain);
 		remain = NULL;
-		return (NULL);
+		return (remain);
 	}
 	remain = get_remain(ptr);
 	return (ptr);
