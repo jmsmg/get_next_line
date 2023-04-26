@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/26 20:59:18 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:47:01 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static char	*get_remain(char *ptr)
 	{
 		return (NULL);
 	}
-	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr));
+	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr + i + 1));
 	if (!tmp)
 	{
 		return (NULL);
