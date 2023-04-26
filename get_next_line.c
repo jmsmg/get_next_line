@@ -6,12 +6,19 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/26 21:47:01 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/26 22:41:21 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+static char	*ft_free(char *ptr)
+{
+	free(ptr);
+	ptr = NULL;
+	return (ptr);
+}
 
 static char	*get_ptr(char *ptr)
 {
@@ -37,7 +44,7 @@ static char	*get_remain(char *ptr)
 	{
 		return (NULL);
 	}
-	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr + i + 1));
+	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr + i));
 	if (!tmp)
 	{
 		return (NULL);
@@ -89,19 +96,14 @@ char	*get_next_line(int fd)
 	if (!remain)
 		remain = ft_strdup("");
 	if (!remain)
-	{
-		free(buf);
-		buf = NULL;
-		return (NULL);
-	}
+		return (ft_free(buf));
 	ptr = get_return_value(fd, buf, remain);
-	free(buf);
-	buf = NULL;
+	buf = ft_free(buf);
 	if ((!ptr || ptr[0] == '\0'))
 	{
-		free(remain);
-		remain = NULL;
-		return (remain);
+		ptr = NULL;
+		remain = ft_free(remain);
+		return (ft_free(remain));
 	}
 	remain = get_remain(ptr);
 	ptr = get_ptr(ptr);
