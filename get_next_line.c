@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/25 20:04:14 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:01:24 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*get_remain(char *ptr)
 		return (NULL);
 	}
 	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr));
-	if (tmp == NULL)
+	if (!tmp)
 	{
 		return (NULL);
 	}
@@ -40,6 +40,7 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 {
 	int		i;
 	int		len;
+	char	*tmp;
 
 	i = 0;
 	len = 1;
@@ -51,9 +52,11 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 		if (len == 0)
 			return (remain);
 		buf[len] = '\0';
-		remain = ft_strjoin(remain, buf);
-		if (remain == NULL)
+		tmp = ft_strjoin(remain, buf);
+		if (!tmp)
 			return (NULL);
+		free(remain);
+		remain = tmp;
 		while (buf[i])
 		{
 			if (buf[i] == '\n')
@@ -77,18 +80,25 @@ char	*get_next_line(int fd)
 	if (!buf)
 		return (NULL);
 	if (!remain)
-	{
 		remain = ft_strdup("");
+	if (!remain)
+	{
+		free(buf);
+		return (NULL);
 	}
 	ptr = get_return_value(fd, buf, remain);
 	free(buf);
 	buf = NULL;
-	if (!ptr || ptr[0] == '\0')
+	if ((!ptr || ptr[0] == '\0'))
 	{
 		free(remain);
 		remain = NULL;
 		return (remain);
 	}
 	remain = get_remain(ptr);
-	return (ptr);
+	char *a;
+	a = ft_strdup(ptr);
+	free(ptr);
+	ptr = 0;
+	return (a);
 }
