@@ -6,12 +6,22 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/26 18:01:24 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/04/26 20:00:24 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
+static char	*get_ptr(char *ptr)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(ptr);
+	free(ptr);
+	ptr = NULL;
+	return (tmp);
+}
 
 static char	*get_remain(char *ptr)
 {
@@ -40,7 +50,6 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 {
 	int		i;
 	int		len;
-	char	*tmp;
 
 	i = 0;
 	len = 1;
@@ -52,11 +61,9 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 		if (len == 0)
 			return (remain);
 		buf[len] = '\0';
-		tmp = ft_strjoin(remain, buf);
-		if (!tmp)
+		remain = ft_strjoin(remain, buf);
+		if (!remain)
 			return (NULL);
-		free(remain);
-		remain = tmp;
 		while (buf[i])
 		{
 			if (buf[i] == '\n')
@@ -84,6 +91,7 @@ char	*get_next_line(int fd)
 	if (!remain)
 	{
 		free(buf);
+		buf = NULL;
 		return (NULL);
 	}
 	ptr = get_return_value(fd, buf, remain);
@@ -96,9 +104,6 @@ char	*get_next_line(int fd)
 		return (remain);
 	}
 	remain = get_remain(ptr);
-	char *a;
-	a = ft_strdup(ptr);
-	free(ptr);
-	ptr = 0;
-	return (a);
+	ptr = get_ptr(ptr);
+	return (ptr);
 }
