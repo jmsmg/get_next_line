@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/01 17:42:53 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:45:47 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*get_next_line(int fd)
 	if ((!ptr || ptr[0] == '\0'))
 	{
 		remain = ft_free(remain);
-		return (ft_free(remain), remain);
+		return (remain);
 	}
 	remain = get_remain(ptr);
 	ptr = get_ptr(ptr);
