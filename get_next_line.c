@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/26 22:41:21 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:01:11 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 		remain = ft_strjoin(remain, buf);
 		if (!remain)
 			return (NULL);
-		while (buf[i])
+		while (remain[i])
 		{
-			if (buf[i] == '\n')
+			if (remain[i] == '\n')
 				return (remain);
 			i++;
 		}
@@ -101,9 +101,8 @@ char	*get_next_line(int fd)
 	buf = ft_free(buf);
 	if ((!ptr || ptr[0] == '\0'))
 	{
-		ptr = NULL;
 		remain = ft_free(remain);
-		return (ft_free(remain));
+		return (ft_free(remain), remain);
 	}
 	remain = get_remain(ptr);
 	ptr = get_ptr(ptr);
