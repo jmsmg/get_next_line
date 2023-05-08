@@ -6,35 +6,39 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/01 17:45:47 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:26:29 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_free(char *ptr)
-{
-	free(ptr);
-	ptr = NULL;
-	return (ptr);
-}
-
-static char	*get_ptr(char *ptr)
+static char	*get_ptr(char *ptr, char *remain)
 {
 	char	*tmp;
 
+	if (!ptr)
+	{
+		remain = ft_free(&remain);
+		return (NULL);
+	}
 	tmp = ft_strdup(ptr);
-	free(ptr);
-	ptr = NULL;
+	if (!tmp)
+	{
+		ptr = ft_free(&ptr);
+		remain = ft_free(&remain);
+		return (NULL);
+	}
+	ft_free(&ptr);
 	return (tmp);
 }
 
 static char	*get_remain(char *ptr)
 {
-	int		i;
+	size_t	i;
 	char	*tmp;
 
 	i = 0;
+	tmp = NULL;
 	while (ptr[i] && ptr[i] != '\n' )
 	{
 		i++;
@@ -43,12 +47,16 @@ static char	*get_remain(char *ptr)
 	{
 		return (NULL);
 	}
-	tmp = ft_substr(ptr, i + 1, ft_strlen(ptr + i));
-	if (!tmp)
+	if (i < ft_strlen(ptr))
 	{
-		return (NULL);
+		tmp = ft_strdup(ptr + i + 1);
+		if (!tmp)
+		{
+			ptr = ft_free(&ptr);
+			return (NULL);
+		}
+		ptr[i + 1] = '\0';
 	}
-	ptr[i + 1] = '\0';
 	return (tmp);
 }
 
@@ -95,15 +103,15 @@ char	*get_next_line(int fd)
 	if (!remain)
 		remain = ft_strdup("");
 	if (!remain)
-		return (ft_free(buf));
+		return (ft_free(&buf));
 	ptr = get_return_value(fd, buf, remain);
-	buf = ft_free(buf);
+	ft_free(&buf);
 	if ((!ptr || ptr[0] == '\0'))
 	{
-		remain = ft_free(remain);
-		return (remain);
+		remain = ft_free(&remain);
+		return (NULL);
 	}
 	remain = get_remain(ptr);
-	ptr = get_ptr(ptr);
+	ptr = get_ptr(ptr, remain);
 	return (ptr);
 }

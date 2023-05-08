@@ -6,11 +6,21 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:31:04 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/04/26 20:59:16 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:19:25 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_free(char **ptr)
+{
+	if (*ptr)
+	{
+		free(*ptr);
+		ptr = NULL;
+	}
+	return (NULL);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -57,8 +67,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	ft_strcat(tmp, s1);
 	i = ft_strlen(s1);
 	ft_strcat(tmp + i, s2);
-	free(s1);
-	s1 = 0;
+	ft_free(&s1);;
 	return (tmp);
 }
 
@@ -81,35 +90,6 @@ char	*ft_strdup(const char *s1)
 	while (s1[i])
 	{
 		tmp[i] = s1[i];
-		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char	*tmp;
-	size_t	i;
-	size_t	size;
-
-	size = (size_t)ft_strlen(s);
-	if (size <= start)
-		size = 0;
-	else if (size <= start + len)
-		size = size - start;
-	else
-		size = len;
-	tmp = (char *)malloc(size + 1);
-	if (!tmp)
-	{
-		return (0);
-	}
-	i = 0;
-	while (i < size)
-	{
-		tmp[i] = s[start];
-		start++;
 		i++;
 	}
 	tmp[i] = '\0';

@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:33:41 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/01 17:29:05 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:19:34 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strcat(char *dst, const char *src);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strdup(const char *s1);
-char	*ft_substr(char *s, unsigned int start, size_t len);
+char	*ft_free(char **ptr);
 
 char	*get_next_line(int fd);
 #endif
