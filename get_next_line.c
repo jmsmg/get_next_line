@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/08 19:26:29 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:45:43 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,16 @@ static char	*get_remain(char *ptr)
 	{
 		i++;
 	}
-	if (ptr[i] == '\0' || ptr[i + 1] == '\0')
+	if (ptr[i] == '\0' || ptr[i + 1] == '\0' || ft_strlen(ptr) <= i)
 	{
 		return (NULL);
 	}
-	if (i < ft_strlen(ptr))
+	tmp = ft_strdup(ptr + i + 1);
+	if (!tmp)
 	{
-		tmp = ft_strdup(ptr + i + 1);
-		if (!tmp)
-		{
-			ptr = ft_free(&ptr);
-			return (NULL);
-		}
-		ptr[i + 1] = '\0';
+		return (NULL);
 	}
+	ptr[i + 1] = '\0';
 	return (tmp);
 }
 
@@ -69,6 +65,8 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 	len = 1;
 	while (len)
 	{
+		if (!remain)
+			return (NULL);
 		len = read(fd, buf, BUFFER_SIZE);
 		if (len == -1)
 			return (NULL);
@@ -76,8 +74,6 @@ static char	*get_return_value(int fd, char *buf, char *remain)
 			return (remain);
 		buf[len] = '\0';
 		remain = ft_strjoin(remain, buf);
-		if (!remain)
-			return (NULL);
 		while (remain[i])
 		{
 			if (remain[i] == '\n')
@@ -102,8 +98,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!remain)
 		remain = ft_strdup("");
-	if (!remain)
-		return (ft_free(&buf));
 	ptr = get_return_value(fd, buf, remain);
 	ft_free(&buf);
 	if ((!ptr || ptr[0] == '\0'))
