@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:46:25 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/01 18:13:34 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:08:00 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
@@ -24,6 +24,7 @@ int	main()
 	{
 		printf("%s", get_next_line(fd));
 		printf("%s", get_next_line(fd));
+		/*
 		printf("%s", get_next_line(fd));
 		printf("%s", get_next_line(fd));
 		printf("%s", get_next_line(fd));
@@ -37,5 +38,6 @@ int	main()
 		printf("%s", get_next_line(fd));
 		printf("%s", get_next_line(fd));
 		printf("%s", get_next_line(fd));
+	*/
 	}
 }

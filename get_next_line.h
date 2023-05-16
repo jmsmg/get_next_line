@@ -6,7 +6,7 @@
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:33:41 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/08 19:19:34 by seonggoc         ###   ########.fr       */
+/*   Updated: 2023/05/16 12:34:45 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #  define BUFFER_SIZE 1024
 # endif
 
-char	*ft_strchr(const char *s, int c);
 size_t	ft_strlen(const char *s);
 char	*ft_strcat(char *dst, const char *src);
 char	*ft_strjoin(char *s1, char *s2);
