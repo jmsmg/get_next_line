@@ -5,91 +5,58 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:13:47 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/16 16:54:21 by seonggoc         ###   ########.fr       */
+/*   Created: 2023/04/04 14:29:08 by seonggoc          #+#    #+#             */
+/*   Updated: 2023/05/16 18:54:09 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-char	*get_remain(char *ptr, char *remain)
+static char	*get_ptr(char *ptr, char *remain)
 {
-	int		i;
-	int		size;
-	int		l_size;
 	char	*tmp;
 
-	size = 0;
-	l_size = 0;
 	if (!ptr)
 	{
 		remain = ft_free(&remain);
 		return (NULL);
 	}
-	while (remain[size])
-	{
-		size++;
-	}
-	while (ptr[l_size])
-	{
-		l_size++;
-	}
-	size = size - l_size;
-	tmp = (char *)malloc((sizeof(char) * size) + 1);
+	tmp = ft_strdup(ptr);
 	if (!tmp)
 	{
-		remain = ft_free(&remain);
 		ptr = ft_free(&ptr);
+		remain = ft_free(&remain);
 		return (NULL);
 	}
-	i = 0;
-	while (i < size)
-	{
-		tmp[i] = remain[l_size];
-		i++;
-		l_size++;
-	}
-	tmp[i] = '\0';
-	remain = ft_free(&remain);
+	ft_free(&ptr);
 	return (tmp);
 }
 
-char	*get_return_value(char *remain)
+static char	*get_remain(char *ptr)
 {
-	int		i;
-	int		size;
-	char	*ptr;
+	size_t	i;
+	char	*tmp;
 
-	size = 0;
-	while (remain[size] && remain[size] != '\n')
-	{
-		size++;
-	}
-	if (size == 0 && remain[size] != '\n')
-	{
-		return (NULL);
-	}
-	if (remain[size] == '\n')
-	{
-		size++;
-	}
-	ptr = (char *)malloc((sizeof(char) * size) + 1);
-	if (!ptr)
-	{
-		return (NULL);
-	}
 	i = 0;
-	while (i < size)
+	tmp = NULL;
+	while (ptr[i] && ptr[i] != '\n')
 	{
-		ptr[i] = remain[i];
 		i++;
 	}
-	ptr[i] = '\0';
-	return (ptr);
+	if (ptr[i] == '\0' || ptr[i + 1] == '\0' || ft_strlen(ptr) <= i)
+	{
+		return (NULL);
+	}
+	tmp = ft_strdup(ptr + i + 1);
+	if (!tmp)
+	{
+		return (NULL);
+	}
+	ptr[i + 1] = '\0';
+	return (tmp);
 }
 
-char	*ft_get_line(int fd, char *buf, char *remain)
+static char	*get_return_value(int fd, char *buf, char *remain)
 {
 	int		i;
 	int		len;
@@ -102,10 +69,9 @@ char	*ft_get_line(int fd, char *buf, char *remain)
 			return (NULL);
 		len = read(fd, buf, BUFFER_SIZE);
 		if (len == -1)
-		{
-			remain = ft_free(&remain);
 			return (NULL);
-		}
+		if (len == 0)
+			return (remain);
 		buf[len] = '\0';
 		remain = ft_strjoin(remain, buf);
 		while (remain[i])
@@ -120,10 +86,11 @@ char	*ft_get_line(int fd, char *buf, char *remain)
 
 char	*get_next_line(int fd)
 {
-	char		*ptr;
 	char		*buf;
+	char		*ptr;
 	static char	*remain;
 
+	ptr = 0;
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	buf = (char *)malloc((sizeof(char) * BUFFER_SIZE) + 1);
@@ -131,13 +98,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!remain)
 		remain = ft_strdup("");
-	remain = ft_get_line(fd, buf, remain);
-	buf = ft_free(&buf);
-	if (!remain)
+	ptr = get_return_value(fd, buf, remain);
+	ft_free(&buf);
+	if ((!ptr || ptr[0] == '\0'))
 	{
+		remain = ft_free(&remain);
 		return (NULL);
 	}
-	ptr = get_return_value(remain);
-	remain = get_remain(ptr, remain);
+	remain = get_remain(ptr);
+	ptr = get_ptr(ptr, remain);
 	return (ptr);
 }
