@@ -3,13 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonggoc <seonggoc@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: seonggoc <seonggoc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/10 12:46:25 by seonggoc          #+#    #+#             */
-/*   Updated: 2023/05/16 15:08:00 by seonggoc         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:14:48 by seonggoc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include <fcntl.h>
 #include <unistd.h>
 
